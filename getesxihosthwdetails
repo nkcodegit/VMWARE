@@ -1,0 +1,18 @@
+<#Author       : Kugan
+# Creation Date: 15-10-2020  
+# Usage        : Get Details of All ESXi Host Hardware Details
+#********************************************************************************
+# Date                         Version      Changes
+#------------------------------------------------------------------------
+# 15-10-2020                    1.0        Intial Version
+#
+#*********************************************************************************
+#>
+
+
+line1: Connect-VIServer -Server server_fqdn -User username -Password passwd
+line2: Add-PSSnapin VMware.VimAutomation.Core -ErrorAction 'SilentlyContinue'
+line3: Clear-Host
+line4: $esxi = Get-VMHost | Sort Name
+line5: $D = $esxi | Select-object @{N="HostName";E={ $_ | Get-VMHostNetwork | select -ExpandProperty Hostname}},Manufacturer,Model,ProcessorType,NumCpu,MemoryTotalGB,Version,Build
+line6: $D | Export-Csv -Path "path_name\file_name.csv"
