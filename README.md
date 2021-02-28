@@ -1,5 +1,7 @@
 # vmware
 
 #Author        : Kugan
-# Creation Date: 10-09-2020
-# Usage        : VMWWARE GET VM DETAILS
+
+# 1        : VMWWARE GET VM DETAILS
+# 2        : Get Details of All ESXi Host Hardware Details
+
