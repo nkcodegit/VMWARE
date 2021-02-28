@@ -1,0 +1,33 @@
+<#Author       : Kugan
+# Creation Date: 10-09-2020
+# Usage        : VMWWARE GET VM DETAILS
+#********************************************************************************
+# Date                         Version      Changes
+#------------------------------------------------------------------------
+# 10-09-2020                    1.0        Intial Version
+#*********************************************************************************
+#
+#>
+
+$getallvms=(get-vm -ComputerName (Get-ClusterNode))
+$result=@()
+
+foreach ($item in $getallvms)
+{
+
+$vmname=$item.Name
+$vmfullpath=$item.ConfigurationLocation
+$vmpathtrim=$vmfullpath.Substring(18)
+$pathindex=$vmpathtrim.indexof(“\”)
+$csvpathfrom=$vmpathtrim.substring(0,$pathindex)
+$properties=@{
+
+Name=$vmname
+Path=$csvpathfrom
+
+ #Write-Host $item.name
+}
+ $result+=New-Object psobject -Property $properties
+}
+
+$result |Sort-Object path
